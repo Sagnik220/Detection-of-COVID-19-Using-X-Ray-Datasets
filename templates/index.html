@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block content %}
+	<form class="form-signin" method=post enctype=multipart/form-data>
+		<h1 class="h1 mb-6 ">🧑‍⚕️ <br>COVID-19 Detector AI</h1>
+		<h5 class="h5 mb-4 font-weight-light ">A Deep Learning based X-ray Diagnosis App <br> built with PyTorch, Flask and Bootstrap</h4>
+		<p class="mb-3 notes">⚠️ Note: Upload atmost one image of either class (COVID Positive or Negative), since this app perform classification task not detection.</p>
+		<h2 class="h4 mb-6 font-weight-normal">📤 Upload the Chest X-ray Image</h2>
+		<input type="file" name="file" class="form-control-file" id="inputfile"  onchange="preview_image(event)">
+		<br />
+		<img id="output-image" class="rounded mx-auto d-block"/>
+		<button class="btn btn-lg btn-primary btn-block" id="submit-btn" type="submit">Upload</button>
+		<h5 class="h5 mt-3 mb-3">Here are some images <br/> for download and demo 🔬</p>
+		<div>
+			<a href="/static/test/covid_test3.jpg" download>Image 1</a>
+			<a href="/static/test/normal_test1.jpeg" style="margin-left: 10px;" download>Image 2</a>
+		</div>
+		<p class="mt-5 mb-3 credits">GitHub <a href="https://github.com/arunpandian7/covid-detector-flask">Repo</a></p>
+		<p class=" mb-3 credits" >Built by <a href="https://arunpandian7.github.io">Arun Pandian R</a></p>
+		<img class="logo-img" src="static/logo.png"><img>
+	</form>
+	
+
+	<script type="text/javascript">
+		function preview_image(event) {
+			var reader = new FileReader();
+			reader.onload = function(){
+				var output = document.getElementById('output-image')
+				output.src = reader.result;
+				var button = document.getElementById('submit-btn')
+				button.textContent = "Diagnose"
+			}
+			reader.readAsDataURL(event.target.files[0]);
+		}
+	</script>
+{% endblock %}
